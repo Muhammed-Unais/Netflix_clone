@@ -45,7 +45,8 @@ class VideoListItem extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 10),
                       child: CircleAvatar(
                         radius: 26,
-                        backgroundImage: AssetImage("assets/images/netflix.jpg"),
+                        backgroundImage:
+                            AssetImage("assets/images/netflix.jpg"),
                       ),
                     ),
                     VideoActionsWidget(

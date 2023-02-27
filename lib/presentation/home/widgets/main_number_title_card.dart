@@ -37,7 +37,7 @@ class MainNumberTitleCard extends StatelessWidget {
           child: BorderedText(
             strokeWidth: 5.0,
             strokeColor: Colors.white,
-            child:Text(
+            child: Text(
               '$numbers',
               style: const TextStyle(
                 fontSize: 120,

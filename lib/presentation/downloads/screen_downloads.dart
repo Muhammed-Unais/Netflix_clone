@@ -10,7 +10,7 @@ class ScreenDownloads extends StatelessWidget {
 
   final widgetList = [
     const SmartDownloads(),
-    Section2(),
+    const Section2(),
     const Section3(),
   ];
 
@@ -36,4 +36,3 @@ class ScreenDownloads extends StatelessWidget {
     );
   }
 }
-

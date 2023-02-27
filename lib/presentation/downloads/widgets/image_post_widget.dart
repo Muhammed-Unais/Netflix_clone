@@ -8,7 +8,9 @@ class ImagePostWidget extends StatelessWidget {
       required this.size,
       required this.images,
       required this.angle,
-      this.margin, this.width=0.38, this.hight=0.54});
+      this.margin,
+      this.width = 0.38,
+      this.hight = 0.54});
 
   final Size size;
   final String images;
@@ -16,7 +18,6 @@ class ImagePostWidget extends StatelessWidget {
   final dynamic margin;
   final double width;
   final double hight;
-
 
   @override
   Widget build(BuildContext context) {

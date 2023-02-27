@@ -16,12 +16,12 @@ class MainTopTenMoviesCard extends StatelessWidget {
           title: "Top 10 TV Shows In India Today",
         ),
         LimitedBox(
-          maxHeight: 200, 
+          maxHeight: 200,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: List.generate(
               20,
-              (index) =>  MainNumberTitleCard(numbers: index+1),
+              (index) => MainNumberTitleCard(numbers: index + 1),
             ),
           ),
         ),

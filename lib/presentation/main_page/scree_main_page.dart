@@ -13,17 +13,17 @@ class ScreenMainPage extends StatelessWidget {
     const ScreenHome(),
     const ScreenNewAndHot(),
     const ScreenFastLaughs(),
-    const ScreenSearch(),
+     ScreenSearch(),
     ScreenDownloads(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: ValueListenableBuilder(
           valueListenable: indexchangeNotifier,
-          builder: (context, index,_) {
+          builder: (context, index, _) {
             return _pages[index];
           },
         ),

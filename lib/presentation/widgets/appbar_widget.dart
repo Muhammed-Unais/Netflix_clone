@@ -9,7 +9,7 @@ class AppbarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-         Text(
+        Text(
           title,
           style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),

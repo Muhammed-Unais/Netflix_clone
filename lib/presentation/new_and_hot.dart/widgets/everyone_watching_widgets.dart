@@ -11,7 +11,8 @@ class EveryOneWatchinWdget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
           "Friends",
@@ -25,7 +26,8 @@ class EveryOneWatchinWdget extends StatelessWidget {
         ),
         khight,
         const VideosWidget(),
-        Row(mainAxisAlignment: MainAxisAlignment.end,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: const [
             TextIconButton(
               icon: Icons.share,

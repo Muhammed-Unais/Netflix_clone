@@ -5,7 +5,9 @@ class TextIconButton extends StatelessWidget {
   const TextIconButton({
     super.key,
     required this.title,
-    required this.icon, required this.iconsize, required this.textsize,
+    required this.icon,
+    required this.iconsize,
+    required this.textsize,
   });
 
   final String title;
@@ -26,7 +28,7 @@ class TextIconButton extends StatelessWidget {
           ),
           Text(
             title,
-            style:  TextStyle(color: kwhiteColor, fontSize: textsize),
+            style: TextStyle(color: kwhiteColor, fontSize: textsize),
           ),
         ],
       ),

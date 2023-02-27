@@ -13,7 +13,6 @@ part 'downloads_bloc.freezed.dart';
 
 @Injectable()
 class DownloadsBloc extends Bloc<DownloadsEvevt, DownloadsState> {
-
   final IDownloadsRepo downloadsRepo;
   DownloadsBloc(this.downloadsRepo) : super(DownloadsState.intial()) {
     on<_GetDownloadsImages>(

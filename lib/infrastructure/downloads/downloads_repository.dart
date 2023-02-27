@@ -14,7 +14,7 @@ class DownloadsRespository implements IDownloadsRepo {
       final Response response =
           await Dio(BaseOptions()).get(ApiEndPoints.downloads);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final downloadsList=(response.data['results'] as List).map((e) {
+        final downloadsList = (response.data['results'] as List).map((e) {
           return Downloads.fromJson(e);
         }).toList();
         return Right(downloadsList);

@@ -86,12 +86,9 @@ class EveryOneWatching extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 10,
-      itemBuilder: (context,index) {
-        return const EveryOneWatchinWdget();
-      }
-    );
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return const EveryOneWatchinWdget();
+        });
   }
 }
-
-

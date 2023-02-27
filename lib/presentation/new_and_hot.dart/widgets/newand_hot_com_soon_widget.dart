@@ -89,5 +89,3 @@ class NewAndHotComSoonWidget extends StatelessWidget {
     );
   }
 }
-
-
