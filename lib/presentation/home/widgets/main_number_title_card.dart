@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/colors/constants.dart';
 
 class MainNumberTitleCard extends StatelessWidget {
-  const MainNumberTitleCard({super.key, required this.numbers});
+  const MainNumberTitleCard({super.key, required this.numbers, required this.imageurl});
 
   final int numbers;
+  final String imageurl;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -21,10 +22,10 @@ class MainNumberTitleCard extends StatelessWidget {
               width: 150,
               decoration: BoxDecoration(
                 borderRadius: kRadius10,
-                image: const DecorationImage(
+                image:  DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(
-                    "assets/images/netflix.jpg",
+                  image: NetworkImage(
+                    imageurl,
                   ),
                 ),
               ),

@@ -8,55 +8,67 @@ class NewAndHotComSoonWidget extends StatelessWidget {
   const NewAndHotComSoonWidget({
     super.key,
     required this.size,
+    required this.id,
+    required this.mnthText,
+    required this.dayText,
+    required this.movieName,
+    required this.posterPath,
+    required this.description,
   });
 
   final Size size;
-  // final String mnthText;
-  // final String dayText;
-  // final String bigMovieTitle;
-  // final String mnthText;
+  final String id;
+  final String mnthText;
+  final String dayText;
+  final String movieName;
+  final String posterPath;
+  final String description;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         SizedBox(
           width: 60,
-          height: size.height * 0.6,
+          height: size.height * 0.5,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: const [
+            children: [
               Text(
-                "FEB",
+                mnthText,
                 style: styleMnth,
               ),
               Text(
-                "11",
+                dayText,
                 style: styleNumber,
               ),
             ],
           ),
         ),
         SizedBox(
-          height: size.height * 0.6,
+          height: size.height * 0.5,
           width: size.width - 60,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const VideosWidget(),
+               VideosWidget(vidoeUrl: posterPath),
               Row(
-                children: const [
-                  Text(
-                    "TALL GIRL 2",
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                children:  [
+                  Expanded(
+                    child: Text(
+                      movieName,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  Spacer(),
-                  TextIconButton(
+                  const TextIconButton(
                     icon: Icons.notifications_sharp,
                     title: "Remind me",
                     iconsize: 20,
                     textsize: 16,
                   ),
-                  TextIconButton(
+                  const TextIconButton(
                     icon: Icons.info,
                     title: "Info",
                     iconsize: 20,
@@ -65,22 +77,26 @@ class NewAndHotComSoonWidget extends StatelessWidget {
                 ],
               ),
               khight,
-              const Text(
-                "Coming On Friday",
+               Text(
+                "Coming On $dayText $mnthText",
                 style: style,
               ),
               khight,
-              const Text(
-                "Tall Girl 2",
-                style: TextStyle(
+               Text(
+                movieName,
+                overflow: TextOverflow.fade,
+                maxLines: 1,
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     color: kwhiteColor),
               ),
               khight,
-              const Text(
-                "Coming On Friday jdsfjkhsdfkhj jsknfkjdskjnkjdh skdbnfkdjsk sknfkjsdkjfkjsbkjsd kjdsnfkjndsfkjdsf ksdfkdskjkkf kdjsfkjsdfkdsj djfnkjkjs",
-                style: TextStyle(color: Colors.grey),
+               Text(
+                description,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 4,
+                style: const TextStyle(color: Colors.grey,fontSize: 18),
               ),
             ],
           ),

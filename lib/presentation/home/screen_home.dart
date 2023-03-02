@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_clone/application/home/home_bloc.dart';
 import 'package:netflix_clone/core/colors/colors.dart';
 import 'package:netflix_clone/core/colors/constants.dart';
 import 'package:netflix_clone/presentation/home/widgets/main_title_with_card.dart';
@@ -12,64 +14,125 @@ class ScreenHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      BlocProvider.of<HomeBloc>(context).add(const GetHomeScreenData());
+    });
     ValueNotifier scrollNotifier = ValueNotifier(true);
     final ksizeWidth = MediaQuery.of(context).size.width;
     final ksizeHight = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: ValueListenableBuilder(
-        valueListenable: scrollNotifier,
-        builder: (context, value, _) {
-          return NotificationListener<UserScrollNotification>(
-            onNotification: (notification) {
-              final ScrollDirection direction = notification.direction;
-              if (direction == ScrollDirection.reverse) {
-                scrollNotifier.value = false;
-              } else if (direction == ScrollDirection.forward) {
-                scrollNotifier.value = true;
+      body: Stack(
+        children: [
+          BlocBuilder<HomeBloc, HomeState>(
+            builder: (context, state) {
+              if (state.isLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                  ),
+                );
+              } else if (state.hasError) {
+                return const Center(
+                  child: Text(
+                    "Error while getting data",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                );
               }
-              return true;
+              // relesed past year
+              final releasePastYear = state.pastYearMovielist.map((m) {
+                return '$imageAppendUrl${m.posterPath}';
+              }).toList();
+              // Trending
+              final trending = state.trendingMovieList.map((m) {
+                return '$imageAppendUrl${m.posterPath}';
+              }).toList();
+              // Tense Dramas
+              final tenseDrams = state.tenceDramasMovieList.map((m) {
+                return '$imageAppendUrl${m.posterPath}';
+              }).toList();
+              // south indian movies
+              final southIndian = state.southIndianMovieList.map((m) {
+                return '$imageAppendUrl${m.posterPath}';
+              }).toList();
+              // Top 10 Tv shows
+              final toptenMovies = state.trendingTvList.map(
+                (m) {
+                  return '$imageAppendUrl${m.posterPath}';
+                },
+              ).toList();
+
+              return ListView(
+                children: [
+                  MainBannerWidget(
+                      ksizeWidth: ksizeWidth, ksizeHight: ksizeHight),
+                  MainTitleWithCards(
+                      posterList: releasePastYear.sublist(0, 10),
+                      titles: "Released In the Past Year"),
+                  MainTitleWithCards(
+                    titles: "Trending Now",
+                    posterList: trending.sublist(0, 10),
+                  ),
+                  MainTopTenMoviesCard(
+                    posterlist: toptenMovies.sublist(0,10),
+                  ),
+                  MainTitleWithCards(
+                    titles: "Tense Dramas",
+                    posterList: tenseDrams.sublist(0, 10),
+                  ),
+                  MainTitleWithCards(
+                    titles: "South Indian Cinema",
+                    posterList: southIndian.sublist(0, 10),
+                  ),
+                ],
+              );
             },
-            child: Stack(
-              children: [
-                ListView(
+          ),
+          ValueListenableBuilder(
+            valueListenable: scrollNotifier,
+            builder: (context, value, _) {
+              return NotificationListener<UserScrollNotification>(
+                onNotification: (notification) {
+                  final ScrollDirection direction = notification.direction;
+                  if (direction == ScrollDirection.reverse) {
+                    scrollNotifier.value = false;
+                  } else if (direction == ScrollDirection.forward) {
+                    scrollNotifier.value = true;
+                  }
+                  return true;
+                },
+                child: Stack(
                   children: [
-                    MainBannerWidget(
-                        ksizeWidth: ksizeWidth, ksizeHight: ksizeHight),
-                    const MainTitleWithCards(
-                        titles: "Released In the Past Year"),
-                    const MainTitleWithCards(titles: "Trending Now"),
-                    const MainTopTenMoviesCard(),
-                    const MainTitleWithCards(titles: "Tense Dramas"),
-                    const MainTitleWithCards(titles: "South Indian Cinema"),
-                  ],
-                ),
-                scrollNotifier.value == true
-                    ? Column(
-                        children: [
-                          const AppbarWidget(
-                            title: 'Netflix',
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: const [
-                              Text(
-                                "TV Shows",
-                                style: style,
+                    scrollNotifier.value == true
+                        ? Column(
+                            children: [
+                              const AppbarWidget(
+                                title: 'Netflix',
                               ),
-                              Text("Movies", style: style),
-                              Text(
-                                "Catagories",
-                                style: style,
-                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: const [
+                                  Text(
+                                    "TV Shows",
+                                    style: style,
+                                  ),
+                                  Text("Movies", style: style),
+                                  Text(
+                                    "Catagories",
+                                    style: style,
+                                  ),
+                                ],
+                              )
                             ],
                           )
-                        ],
-                      )
-                    : khight
-              ],
-            ),
-          );
-        },
+                        : khight
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

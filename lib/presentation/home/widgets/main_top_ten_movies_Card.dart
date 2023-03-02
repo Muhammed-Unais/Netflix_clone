@@ -4,8 +4,9 @@ import 'package:netflix_clone/presentation/widgets/main_title.dart';
 
 class MainTopTenMoviesCard extends StatelessWidget {
   const MainTopTenMoviesCard({
-    super.key,
+    super.key, required this.posterlist,
   });
+  final List<String> posterlist;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +21,8 @@ class MainTopTenMoviesCard extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: List.generate(
-              20,
-              (index) => MainNumberTitleCard(numbers: index + 1),
+              posterlist.length,
+              (index) => MainNumberTitleCard(numbers: index + 1,imageurl: posterlist[index]),
             ),
           ),
         ),

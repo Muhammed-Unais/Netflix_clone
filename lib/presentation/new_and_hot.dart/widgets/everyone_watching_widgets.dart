@@ -7,25 +7,31 @@ import 'package:netflix_clone/presentation/widgets/vidoe_widget.dart';
 class EveryOneWatchinWdget extends StatelessWidget {
   const EveryOneWatchinWdget({
     super.key,
+    required this.movieName,
+    required this.posterPath,
+    required this.description,
   });
+  final String movieName;
+  final String posterPath;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          "Friends",
-          style: TextStyle(
+         Text(
+          movieName,
+          style: const TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20, color: kwhiteColor),
         ),
         khight,
-        const Text(
-          "Coming On Friday jdsfjkhsdfkhj jsknfkjdskjnkjdh skdbnfkdjsk sknfkjsdkjfkjsbkjsd kjdsnfkjndsfkjdsf ksdfkdskjkkf kdjsfkjsdfkdsj djfnkjkjs niathin nfijtkka fdiia dnneaortbi nkiebbdejtneh fioneonnaudndjeof efjjdiodnc dcioncdojfjdnfodf idjfiodjoxj",
-          style: TextStyle(color: Colors.grey),
+         Text(description,overflow: TextOverflow.ellipsis,
+         maxLines: 4,
+          style: const TextStyle(color: Colors.grey,fontSize: 15),
         ),
         khight,
-        const VideosWidget(),
+         VideosWidget(vidoeUrl: posterPath),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: const [

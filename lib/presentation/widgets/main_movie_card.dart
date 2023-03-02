@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/colors/constants.dart';
 
 class MainMovieCard extends StatelessWidget {
+  final String imageUrl;
   const MainMovieCard({
-    super.key,
+    super.key, required this.imageUrl,
   });
 
   @override
@@ -13,10 +14,10 @@ class MainMovieCard extends StatelessWidget {
       width: 150,
       decoration: BoxDecoration(
         borderRadius: kRadius10,
-        image: const DecorationImage(
+        image:  DecorationImage(
           fit: BoxFit.cover,
-          image: AssetImage(
-            "assets/images/netflix.jpg",
+          image: NetworkImage(
+            imageUrl,
           ),
         ),
       ),

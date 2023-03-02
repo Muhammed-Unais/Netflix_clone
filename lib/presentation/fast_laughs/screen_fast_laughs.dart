@@ -13,12 +13,36 @@ class ScreenFastLaughs extends StatelessWidget {
     });
     return Scaffold(
       body: SafeArea(
-        child: PageView(
-          scrollDirection: Axis.vertical,
-          children: List.generate(
-            10,
-            (index) => VideoListItem(index: index),
-          ),
+        child: BlocBuilder<FastLaughsBloc, FastLaughsState>(
+          builder: (context, state) {
+            if (state.isLoading) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
+              );
+            } else if (state.isError) {
+              return const Center(
+                child: Text("Error while getting data"),
+              );
+            } else if (state.videosList.isEmpty) {
+              return const Center(
+                child: Text("Video not found"),
+              );
+            } else {
+              return PageView(
+                scrollDirection: Axis.vertical,
+                children: List.generate(
+                  state.videosList.length,
+                  (index) => VideoListitemInheritedWidget(
+                    key: Key(index.toString()),
+                    widgets: VideoListItem(index: index),
+                    movieData: state.videosList[index],
+                  ),
+                ),
+              );
+            }
+          },
         ),
       ),
     );
