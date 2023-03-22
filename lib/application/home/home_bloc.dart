@@ -85,7 +85,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             return HomeState(
               stateId: DateTime.now().millisecondsSinceEpoch.toString(),
               pastYearMovielist: state.pastYearMovielist,
-              trendingMovieList: top10List,
+              trendingMovieList: state.trendingMovieList,
               tenceDramasMovieList: state.tenceDramasMovieList,
               southIndianMovieList: state.southIndianMovieList,
               trendingTvList: top10List,

@@ -61,29 +61,38 @@ class ScreenHome extends StatelessWidget {
                   return '$imageAppendUrl${m.posterPath}';
                 },
               ).toList();
+              toptenMovies.shuffle();
+              southIndian.shuffle();
+              tenseDrams.shuffle();
+              trending.shuffle();
 
               return ListView(
                 children: [
                   MainBannerWidget(
                       ksizeWidth: ksizeWidth, ksizeHight: ksizeHight),
-                  MainTitleWithCards(
-                      posterList: releasePastYear.sublist(0, 10),
-                      titles: "Released In the Past Year"),
-                  MainTitleWithCards(
-                    titles: "Trending Now",
-                    posterList: trending.sublist(0, 10),
-                  ),
-                  MainTopTenMoviesCard(
-                    posterlist: toptenMovies.sublist(0,10),
-                  ),
-                  MainTitleWithCards(
-                    titles: "Tense Dramas",
-                    posterList: tenseDrams.sublist(0, 10),
-                  ),
-                  MainTitleWithCards(
-                    titles: "South Indian Cinema",
-                    posterList: southIndian.sublist(0, 10),
-                  ),
+                  if (releasePastYear.length >= 10)
+                    MainTitleWithCards(
+                        posterList: releasePastYear.sublist(0, 10),
+                        titles: "Released In the Past Year"),
+                  if (trending.length >= 10)
+                    MainTitleWithCards(
+                      titles: "Trending Now",
+                      posterList: trending.sublist(0, 10),
+                    ),
+                  if (toptenMovies.length >= 10)
+                    MainTopTenMoviesCard(
+                      posterlist: toptenMovies.sublist(0, 10),
+                    ),
+                  if (tenseDrams.length >= 10)
+                    MainTitleWithCards(
+                      titles: "Tense Dramas",
+                      posterList: tenseDrams.sublist(0, 10),
+                    ),
+                  if (southIndian.length >= 10)
+                    MainTitleWithCards(
+                      titles: "South Indian Cinema",
+                      posterList: southIndian.sublist(0, 10),
+                    ),
                 ],
               );
             },
